@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List Yama Apps muhammad ridho</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-section {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+
+        .form-section input,
+        .form-section button {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-section button {
+            background-color: #f63bda;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        section button {
+            padding: 8px;
+            border-radius: 4px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .blue-btn {
+            background-color: #f63ba8;
+        }
+
+        .red-btn {
+            background-color: #ca44ef;
+        }
+
+        #todo-list {
+            list-style: none;
+            padding: 0;
+            width: 300px;
+        }
+
+        #todo-list li {
+            padding: 5px 0;
+        }
+
+        #todo-list p {
+            margin: 0;
+        }
+
+        footer {
+            margin-top: 20px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Todo List Apps</h1>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <input type="text" id="todo-input" placeholder="Enter a new todo item">
+            <input type="date" id="todo-date">
+            <button type="button" onclick="addTodo();">Add Todo</button>
+        </section>
+
+        <section class="flex pt-2 justify-between">
+            <button class="blue-btn" onclick="filterTodos();">Filter Todos</button>
+            <button class="red-btn" onclick="clearTodos();">Clear All Todos</button>
+        </section>
+
+        <section class="pt-2">
+            <header>
+                <h2>List of Todos</h2>
+            </header>
+            <ul id="todo-list">
+                <li>No todos available</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Todo List Yama Apps</p>
+    </footer>
+
+    <script>
+    
+        let todos = [];
+
+        function addTodo() {
+            const todoInput = document.getElementById("todo-input");
+            const todoDate = document.getElementById("todo-date");
+
+           
+            if (todoInput.value === '' || todoDate.value === '') {
+                alert("Please fill in both fields.");
+            } else {
+               
+                todos.push({ text: todoInput.value, date: todoDate.value });
+                todoInput.value = '';
+                todoDate.value = '';
+
+                renderTodos();
+            }
+        }
+
+      
+        function renderTodos() {
+            const todoList = document.getElementById('todo-list');
+
+        
+            todoList.innerHTML = '';
+
+            if(todos.length === 0){
+                todoList.innerHTML = '<li>No todos available</li>';
+                return;
+            }
+            todos.forEach((todo) => {
+                todoList.innerHTML += `
+                    <li>
+                        <p>${todo.text} <span style="font-size:0.8rem; color:gray">(${todo.date})</span></p>
+                        <hr />
+                    </li>`;
+            });
+        }
+
+    
+        function clearTodos() {
+            todos = [];
+            renderTodos();
+        }
+
+        function filterTodos() {
+            alert("Filter feature coming soon!");
+        }
+    </script>
+</body>
+</html>
